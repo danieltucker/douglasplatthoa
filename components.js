@@ -37,8 +37,8 @@
         </div>
       </div>
       <div class="footer-inner">
-        <p class="footer-copy">© 2026 Douglas Plats Homeowners Association · All rights reserved.</p>
-        <p class="footer-copy" style="margin-top:.5rem;">Designed &amp; Hosted by <a href="https://bellinghamhosting.com" target="_blank" style="color:rgba(255,255,255,.6); text-decoration:underline;">bellinghamhosting.com</a></p>
+        <p class="footer-copy">© 2026 Douglas Plats Homeowners Association · All rights reserved.<br>
+        Designed &amp; Hosted by <a href="https://bellinghamhosting.com" target="_blank" style="color:rgba(255,255,255,.6); text-decoration:underline;">bellinghamhosting.com</a></p>
       </div>
     `;
   }
