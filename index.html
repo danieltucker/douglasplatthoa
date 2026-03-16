@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ferndale HOA — A Community We're Proud to Call Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:  #2d5a27;
+      --green-mid:   #4a8c3f;
+      --green-light: #7dba6e;
+      --green-pale:  #e8f5e3;
+      --amber:       #e8a838;
+      --amber-light: #fdf3da;
+      --cream:       #faf8f3;
+      --text:        #2a2a2a;
+      --text-mid:    #4a4a4a;
+      --text-soft:   #787878;
+      --white:       #ffffff;
+      --shadow-sm:   0 2px 12px rgba(45,90,39,.10);
+      --shadow-md:   0 6px 28px rgba(45,90,39,.14);
+      --radius:      16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,243,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(125,186,110,.25);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .65rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--green-deep); text-decoration: none;
+    }
+    .nav-logo .leaf { font-size: 1.5rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-weight: 600; font-size: .95rem;
+      color: var(--text-mid); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--green-mid); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 540px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(125,186,110,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 70%, rgba(232,168,56,.12) 0%, transparent 65%),
+        linear-gradient(160deg, #f0f7ec 0%, #faf8f3 55%, #f7f0e0 100%);
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--green-pale);
+      border: 1.5px solid var(--green-light);
+      color: var(--green-deep);
+      font-weight: 700; font-size: .8rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .35rem 1rem; border-radius: 100px;
+      margin-bottom: 1.25rem;
+      animation: fadeUp .5s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700; line-height: 1.18;
+      color: var(--green-deep);
+      max-width: 700px; margin: 0 auto .8rem;
+      animation: fadeUp .55s .1s ease both;
+    }
+    .hero h1 em { font-style: normal; color: var(--green-mid); }
+    .hero p {
+      font-size: 1.15rem; color: var(--text-mid);
+      max-width: 520px; margin: 0 auto 2rem;
+      animation: fadeUp .55s .2s ease both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp .55s .3s ease both;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .75rem 1.6rem; border-radius: 100px;
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .95rem;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--green-mid); color: var(--white);
+      box-shadow: 0 4px 18px rgba(74,140,63,.35);
+    }
+    .btn-primary:hover { background: var(--green-deep); box-shadow: 0 6px 22px rgba(45,90,39,.4); }
+    .btn-secondary {
+      background: var(--white); color: var(--green-deep);
+      border: 2px solid var(--green-light);
+    }
+    .btn-secondary:hover { background: var(--green-pale); }
+
+    /* decorative circles */
+    .hero-decor {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; opacity: .45;
+    }
+    .hero-decor-1 { width: 320px; height: 320px; top: -80px; right: -80px; background: radial-gradient(circle, rgba(125,186,110,.22), transparent 70%); }
+    .hero-decor-2 { width: 200px; height: 200px; bottom: -40px; left: 5%; background: radial-gradient(circle, rgba(232,168,56,.18), transparent 70%); }
+
+    /* ─── QUICK INFO STRIP ───────────────────────────────── */
+    .strip {
+      background: var(--green-deep);
+      color: var(--white);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .strip-item {
+      display: flex; align-items: center; gap: .9rem;
+      padding: 1.4rem 2rem;
+      border-right: 1px solid rgba(255,255,255,.12);
+    }
+    .strip-item:last-child { border-right: none; }
+    .strip-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .strip-item strong { display: block; font-size: .8rem; letter-spacing: .07em; text-transform: uppercase; opacity: .7; margin-bottom: .1rem; }
+    .strip-item span { font-size: 1rem; font-weight: 600; }
+
+    /* ─── SECTIONS SHARED ────────────────────────────────── */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 1060px; margin: 0 auto; }
+    .section-label {
+      font-size: .78rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--green-mid);
+      margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700; color: var(--green-deep);
+      line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--text-mid); max-width: 520px; font-size: 1.05rem; margin-bottom: 2.5rem; }
+
+    /* ─── NEWS ───────────────────────────────────────────── */
+    #news { background: var(--white); }
+    .news-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.5rem;
+    }
+    .news-card {
+      background: var(--cream);
+      border: 1.5px solid rgba(125,186,110,.2);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .news-tag {
+      display: inline-block;
+      background: var(--green-pale); color: var(--green-deep);
+      font-size: .72rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; padding: .25rem .7rem; border-radius: 100px;
+      margin-bottom: .9rem;
+    }
+    .news-tag.amber { background: var(--amber-light); color: #8a5e00; }
+    .news-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 600;
+      color: var(--green-deep); margin-bottom: .55rem; line-height: 1.3;
+    }
+    .news-card p { font-size: .92rem; color: var(--text-mid); margin-bottom: 1rem; }
+    .news-meta { font-size: .8rem; color: var(--text-soft); display: flex; align-items: center; gap: .4rem; }
+
+    /* ─── DOCUMENTS ──────────────────────────────────────── */
+    #documents { background: var(--green-pale); }
+    .docs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem;
+    }
+    .doc-card {
+      background: var(--white);
+      border: 1.5px solid rgba(125,186,110,.25);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      text-decoration: none; color: inherit;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .doc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .doc-icon {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .doc-icon.green  { background: var(--green-pale); }
+    .doc-icon.amber  { background: var(--amber-light); }
+    .doc-icon.blue   { background: #e3eef8; }
+    .doc-info strong { display: block; font-size: .95rem; font-weight: 700; color: var(--green-deep); margin-bottom: .2rem; }
+    .doc-info span   { font-size: .8rem; color: var(--text-soft); }
+    .doc-dl { margin-top: .5rem; font-size: .78rem; font-weight: 700; color: var(--green-mid); display: flex; align-items: center; gap: .3rem; }
+
+    /* ─── CONTACT ────────────────────────────────────────── */
+    #contact { background: var(--white); }
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1.3fr; gap: 3.5rem; align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--green-deep); margin-bottom: 1.2rem;
+    }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: .9rem;
+      margin-bottom: 1.2rem;
+    }
+    .cd-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: .05rem; }
+    .cd-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text-soft); }
+    .cd-val { font-size: .98rem; color: var(--text); font-weight: 600; }
+
+    .contact-form {
+      background: var(--cream);
+      border: 1.5px solid rgba(125,186,110,.2);
+      border-radius: var(--radius);
+      padding: 2.2rem;
+    }
+    .contact-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: var(--green-deep); margin-bottom: 1.5rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: .82rem; font-weight: 700; color: var(--text-mid); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: 'Nunito', sans-serif;
+      font-size: .95rem; color: var(--text);
+      background: var(--white);
+      border: 1.5px solid rgba(125,186,110,.3);
+      border-radius: 10px; padding: .7rem 1rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 3px rgba(74,140,63,.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit { width: 100%; padding: .85rem; font-size: 1rem; border-radius: 100px; cursor: pointer; }
+
+    /* success message */
+    .form-success {
+      display: none; text-align: center; padding: 2rem 1rem;
+    }
+    .form-success .check { font-size: 2.5rem; margin-bottom: .75rem; }
+    .form-success h4 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--green-deep); margin-bottom: .5rem; }
+    .form-success p { color: var(--text-mid); }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--green-deep); color: rgba(255,255,255,.8);
+      padding: 3rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1060px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--white); display: flex; align-items: center; gap: .5rem;
+    }
+    .footer-links { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,.7); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: .8rem; opacity: .5; width: 100%; text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 760px) {
+      .strip { grid-template-columns: 1fr; }
+      .strip-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.12); }
+      .strip-item:last-child { border-bottom: none; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+    @media (max-width: 520px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <span class="leaf">🌿</span>
+      Ferndale HOA
+    </a>
+    <ul class="nav-links">
+      <li><a href="#news">News</a></li>
+      <li><a href="#documents">Documents</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary" style="padding:.55rem 1.2rem; font-size:.88rem;">Get in Touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-decor hero-decor-1"></div>
+    <div class="hero-decor hero-decor-2"></div>
+    <div>
+      <span class="hero-badge">🏡 Welcome to our neighborhood</span>
+      <h1>A community we're<br/><em>proud to call home</em></h1>
+      <p>Ferndale is more than a neighborhood — it's neighbors looking out for each other, shared green spaces, and a place where community thrives.</p>
+      <div class="hero-btns">
+        <a href="#news" class="btn btn-primary">📰 Latest News</a>
+        <a href="#documents" class="btn btn-secondary">📄 View Documents</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- QUICK INFO STRIP -->
+  <div class="strip">
+    <div class="strip-item">
+      <span class="strip-icon">📅</span>
+      <div>
+        <strong>Next Meeting</strong>
+        <span>Tuesday, April 8 · 7:00 PM</span>
+      </div>
+    </div>
+    <div class="strip-item">
+      <span class="strip-icon">📍</span>
+      <div>
+        <strong>Location</strong>
+        <span>Ferndale Community Center</span>
+      </div>
+    </div>
+    <div class="strip-item">
+      <span class="strip-icon">📧</span>
+      <div>
+        <strong>Board Email</strong>
+        <span>board@ferndalehoa.com</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="section-inner">
+      <p class="section-label reveal">Community Updates</p>
+      <h2 class="section-title reveal">Recent News &amp; Announcements</h2>
+      <p class="section-sub reveal">Stay up to date with what's happening in Ferndale.</p>
+
+      <div class="news-grid">
+
+        <div class="news-card reveal">
+          <span class="news-tag amber">📣 Announcement</span>
+          <h3>Spring Landscaping Project Begins April 14</h3>
+          <p>Common area hedges will be trimmed and new native plantings added along Ferndale Drive. Work runs Monday–Wednesday for two weeks.</p>
+          <div class="news-meta">🗓 March 10, 2026</div>
+        </div>
+
+        <div class="news-card reveal">
+          <span class="news-tag">🏛 Meeting</span>
+          <h3>April Board Meeting Agenda Now Available</h3>
+          <p>Topics include the 2026–27 budget review, pool reopening date, and a proposal for updated parking guidelines. All residents welcome.</p>
+          <div class="news-meta">🗓 March 7, 2026</div>
+        </div>
+
+        <div class="news-card reveal">
+          <span class="news-tag">🎉 Event</span>
+          <h3>Community Clean-Up Day — April 26</h3>
+          <p>Join your neighbors for our annual spring clean-up! Supplies provided. Light refreshments and a raffle for all volunteers who sign up in advance.</p>
+          <div class="news-meta">🗓 February 28, 2026</div>
+        </div>
+
+        <div class="news-card reveal">
+          <span class="news-tag amber">🔧 Maintenance</span>
+          <h3>Pool Closed for Inspection Through April 30</h3>
+          <p>Annual safety inspection and equipment servicing is underway. The pool is expected to reopen for the season on May 1, pending passing inspection.</p>
+          <div class="news-meta">🗓 February 20, 2026</div>
+        </div>
+
+        <div class="news-card reveal">
+          <span class="news-tag">📋 Notice</span>
+          <h3>Updated Architectural Request Guidelines</h3>
+          <p>The board has approved minor updates to the ARC submission process. Review the revised form in the Documents section before submitting any exterior changes.</p>
+          <div class="news-meta">🗓 February 12, 2026</div>
+        </div>
+
+        <div class="news-card reveal">
+          <span class="news-tag">🌳 Community</span>
+          <h3>New Welcome Packets for New Residents</h3>
+          <p>We've updated our new homeowner welcome packet with helpful info about trash pickup, amenity access, and local resources. Available at the front office.</p>
+          <div class="news-meta">🗓 January 30, 2026</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTS -->
+  <section id="documents">
+    <div class="section-inner">
+      <p class="section-label reveal">Public Records</p>
+      <h2 class="section-title reveal">Community Documents</h2>
+      <p class="section-sub reveal">Governing documents, meeting minutes, budgets, and forms — all in one place.</p>
+
+      <div class="docs-grid">
+
+        <a href="#" class="doc-card reveal">
+          <div class="doc-icon green">📘</div>
+          <div class="doc-info">
+            <strong>CC&Rs</strong>
+            <span>Covenants, Conditions &amp; Restrictions</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="#" class="doc-card reveal">
+          <div class="doc-icon green">📗</div>
+          <div class="doc-info">
+            <strong>Bylaws</strong>
+            <span>HOA Bylaws — Revised 2024</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="#" class="doc-card reveal">
+          <div class="doc-icon amber">📒</div>
+          <div class="doc-info">
+            <strong>Rules &amp; Regulations</strong>
+            <span>Community Standards</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="#" class="doc-card reveal">
+          <div class="doc-icon amber">💰</div>
+          <div class="doc-info">
+            <strong>2026 Annual Budget</strong>
+            <span>Approved by the Board Jan 2026</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="#" class="doc-card reveal">
+          <div class="doc-icon blue">📋</div>
+          <div class="doc-info">
+            <strong>Meeting Minutes</strong>
+            <span>All board meeting minutes</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="#" class="doc-card reveal">
+          <div class="doc-icon blue">🏗</div>
+          <div class="doc-info">
+            <strong>ARC Request Form</strong>
+            <span>Exterior modification requests</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="#" class="doc-card reveal">
+          <div class="doc-icon green">📅</div>
+          <div class="doc-info">
+            <strong>Meeting Schedule 2026</strong>
+            <span>All board meetings this year</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="#" class="doc-card reveal">
+          <div class="doc-icon amber">📨</div>
+          <div class="doc-info">
+            <strong>Assessment &amp; Dues Info</strong>
+            <span>Payment schedule &amp; due dates</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-wrap">
+
+        <div class="contact-info">
+          <p class="section-label reveal">Get in Touch</p>
+          <h2 class="section-title reveal">We're here to help</h2>
+          <p class="section-sub reveal">Have a question, concern, or just want to say hello? Reach out and a board member will get back to you promptly.</p>
+
+          <div class="contact-detail reveal">
+            <span class="cd-icon">📧</span>
+            <div>
+              <div class="cd-label">Email</div>
+              <div class="cd-val">board@ferndalehoa.com</div>
+            </div>
+          </div>
+
+          <div class="contact-detail reveal">
+            <span class="cd-icon">📞</span>
+            <div>
+              <div class="cd-label">Phone</div>
+              <div class="cd-val">(555) 740-2200</div>
+            </div>
+          </div>
+
+          <div class="contact-detail reveal">
+            <span class="cd-icon">🕐</span>
+            <div>
+              <div class="cd-label">Response Time</div>
+              <div class="cd-val">Typically within 2 business days</div>
+            </div>
+          </div>
+
+          <div class="contact-detail reveal">
+            <span class="cd-icon">📬</span>
+            <div>
+              <div class="cd-label">Mailing Address</div>
+              <div class="cd-val">Ferndale HOA<br/>P.O. Box 1482<br/>Ferndale, WA 98248</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form reveal">
+          <div id="formWrap">
+            <h3>Send us a message</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" placeholder="Jane" />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" placeholder="Smith" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="jane@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="topic">Topic</label>
+              <select id="topic">
+                <option value="">Select a topic…</option>
+                <option>General Question</option>
+                <option>Maintenance Request</option>
+                <option>ARC / Home Modification</option>
+                <option>Neighbor Concern</option>
+                <option>Dues / Billing</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="How can we help you?"></textarea>
+            </div>
+            <button class="btn btn-primary form-submit" onclick="submitForm()">Send Message 💌</button>
+          </div>
+          <div class="form-success" id="formSuccess">
+            <div class="check">✅</div>
+            <h4>Message received!</h4>
+            <p>Thanks for reaching out. A board member will reply to you within 2 business days.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🌿 Ferndale HOA</div>
+      <div class="footer-links">
+        <a href="#news">News</a>
+        <a href="#documents">Documents</a>
+        <a href="#contact">Contact</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Ferndale Homeowners Association · ferndalehoa.com · All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // stagger siblings
+          const siblings = [...e.target.parentElement.querySelectorAll('.reveal')];
+          const idx = siblings.indexOf(e.target);
+          e.target.style.transitionDelay = (idx * 0.07) + 's';
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Form submit
+    function submitForm() {
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if (!email || !message) {
+        alert('Please fill in your email and message before sending.');
+        return;
+      }
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
