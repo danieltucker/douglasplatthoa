@@ -1,0 +1,3 @@
+# Password file — never commit this to the repo
+.htpasswd
+

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Douglas Platt HOA — A Community We're Proud to Call Home</title>
+  <title>Douglas Plats HOA — A Community We're Proud to Call Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -217,6 +217,46 @@
     .doc-info span   { font-size: .8rem; color: var(--text-soft); }
     .doc-dl { margin-top: .5rem; font-size: .78rem; font-weight: 700; color: var(--green-mid); display: flex; align-items: center; gap: .3rem; }
 
+    /* ─── MANAGEMENT ────────────────────────────────────── */
+    #management { background: var(--white); }
+    .mgmt-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;
+    }
+    .mgmt-card {
+      background: var(--cream);
+      border: 1.5px solid rgba(125,186,110,.2);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+    }
+    .mgmt-card-header {
+      display: flex; align-items: center; gap: .75rem; margin-bottom: .9rem;
+    }
+    .mgmt-card-icon {
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+      background: var(--green-pale);
+    }
+    .mgmt-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 600; color: var(--green-deep); line-height: 1.3;
+    }
+    .mgmt-card ul {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .mgmt-card ul li {
+      font-size: .88rem; color: var(--text-mid);
+      padding: .28rem 0; border-bottom: 1px solid rgba(125,186,110,.12);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .mgmt-card ul li:last-child { border-bottom: none; }
+    .mgmt-card ul li::before { content: '✓'; color: var(--green-mid); font-weight: 700; flex-shrink: 0; }
+    .mgmt-byline {
+      margin-top: 2.5rem; text-align: center;
+      font-size: .88rem; color: var(--text-soft);
+    }
+    .mgmt-byline a { color: var(--green-mid); font-weight: 700; text-decoration: none; }
+    .mgmt-byline a:hover { color: var(--green-deep); text-decoration: underline; }
+
     /* ─── CONTACT ────────────────────────────────────────── */
     #contact { background: var(--white); }
     .contact-wrap {
@@ -288,7 +328,7 @@
     <div>
       <span class="hero-badge">🏡 Welcome to our neighborhood</span>
       <h1>A community we're<br/><em>proud to call home</em></h1>
-      <p>The Douglas RD Platt HOA is in place to provide maintance of the retention pond located on Clearview Dr.</p>
+      <p>The Douglas Platt HOA is a community association to provide services for our neighborhood.</p>
       <div class="hero-btns">
         <a href="#news" class="btn btn-primary">📰 Latest News</a>
         <a href="#documents" class="btn btn-secondary">📄 View Documents</a>
@@ -316,7 +356,7 @@
       <span class="strip-icon">📧</span>
       <div>
         <strong>Board Email</strong>
-        <span>daniel.tucker+hoa@outlook.com</span>
+        <span>board@ferndalehoa.com</span>
       </div>
     </div>
   </div>
@@ -326,7 +366,7 @@
     <div class="section-inner">
       <p class="section-label reveal">Community Updates</p>
       <h2 class="section-title reveal">Recent News &amp; Announcements</h2>
-      <p class="section-sub reveal">Stay up to date with what's happening in the Douglas Platt HOA.</p>
+      <p class="section-sub reveal">Stay up to date with what's happening in the Douglas Plats HOA.</p>
 
       <div class="news-grid">
 
@@ -409,6 +449,65 @@
     </div>
   </section>
 
+  <!-- MANAGEMENT SERVICES -->
+  <section id="management">
+    <div class="section-inner">
+      <p class="section-label reveal">Our Management Company</p>
+      <h2 class="section-title reveal">Managed by Windermere</h2>
+      <p class="section-sub reveal">The Douglas Plats HOA is professionally managed by Windermere Community Association Management, locally owned and operating since 1962.</p>
+
+      <div class="mgmt-grid">
+
+        <div class="mgmt-card reveal">
+          <div class="mgmt-card-header">
+            <div class="mgmt-card-icon">🏡</div>
+            <h3>Protecting Property Value</h3>
+          </div>
+          <ul>
+            <li>Asset protection</li>
+            <li>Responsive, reliable service</li>
+            <li>24 hr emergency maintenance team</li>
+            <li>Accurate financial reporting</li>
+            <li>Budget management</li>
+          </ul>
+        </div>
+
+        <div class="mgmt-card reveal">
+          <div class="mgmt-card-header">
+            <div class="mgmt-card-icon" style="background:var(--amber-light);">📋</div>
+            <h3>Individualized Management Plans</h3>
+          </div>
+          <ul>
+            <li>Collaborative approach with the board</li>
+            <li>Analysis of current procedures</li>
+            <li>Project administration</li>
+            <li>Quarterly board meeting attendance</li>
+            <li>Annual budget preparation</li>
+          </ul>
+        </div>
+
+        <div class="mgmt-card reveal">
+          <div class="mgmt-card-header">
+            <div class="mgmt-card-icon" style="background:#e3eef8;">🤝</div>
+            <h3>Your Community Partner</h3>
+          </div>
+          <ul>
+            <li>Professionally accredited team</li>
+            <li>Governance & compliance guidance</li>
+            <li>Rules &amp; regulations enforcement</li>
+            <li>Annual state filings &amp; registered agent</li>
+            <li>24/7 online owner portal access</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <p class="mgmt-byline reveal">
+        Managed by <a href="https://www.windermere.com/community-association-management" target="_blank">Windermere Community Association Management</a> · Over 75 years of combined property management experience
+      </p>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-inner">
@@ -423,7 +522,7 @@
             <span class="cd-icon">📧</span>
             <div>
               <div class="cd-label">Email</div>
-              <div class="cd-val">daniel.tucker+hoa@outlook.com</div>
+              <div class="cd-val">board@ferndalehoa.com</div>
             </div>
           </div>
 
@@ -467,6 +566,7 @@
       });
     }, { threshold: 0.12 });
     reveals.forEach(r => observer.observe(r));
+
 
 </script>
   <script src="components.js"></script>

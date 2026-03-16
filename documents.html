@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Documents — Douglas Platt HOA</title>
+  <title>Documents — Douglas Plats HOA</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -170,6 +170,27 @@
     .doc-info span   { font-size: .78rem; color: var(--text-soft); display: block; }
     .doc-dl { margin-top: .4rem; font-size: .75rem; font-weight: 700; color: var(--green-mid); display: flex; align-items: center; gap: .25rem; }
 
+    /* ─── ARCHIVE SECTION ────────────────────────────────── */
+    .archive-divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 3rem 0 2.5rem;
+    }
+    .archive-divider::before,
+    .archive-divider::after {
+      content: ''; flex: 1;
+      border-top: 2px dashed rgba(125,186,110,.3);
+    }
+    .archive-label {
+      font-size: .78rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--text-soft);
+      white-space: nowrap; padding: .3rem .8rem;
+      border: 1.5px solid rgba(125,186,110,.25); border-radius: 100px;
+    }
+    .archive-note {
+      font-size: .88rem; color: var(--text-soft);
+      margin-bottom: 2rem; font-style: italic;
+    }
+
     /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
       background: var(--green-deep); color: rgba(255,255,255,.8);
@@ -209,6 +230,7 @@
     <a href="index.html" class="back-link">← Back to Home</a>
     <h1>Community Documents</h1>
     <p>Governing documents, recorded plats, easements, and association records — all in one place.</p>
+    <p style="margin-top:.75rem; font-size:.88rem; color:var(--text-soft);">🔒 Documents are password-protected. Contact <strong>board@ferndalehoa.com</strong> to request access.</p>
   </div>
 
   <main>
@@ -308,6 +330,10 @@
 
       </div>
     </div>
+
+    <!-- Archive divider -->
+    <div class="archive-divider"><span class="archive-label">📦 Archive — Historical Recorded Documents</span></div>
+    <p class="archive-note">The documents below are older recorded plats, covenants, easements, and ordinances kept for reference.</p>
 
     <!-- South Douglas Recorded Documents -->
     <div class="category">
