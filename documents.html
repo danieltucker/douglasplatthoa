@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documents — Ferndale Douglas Platt HOA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:  #2d5a27;
+      --green-mid:   #4a8c3f;
+      --green-light: #7dba6e;
+      --green-pale:  #e8f5e3;
+      --amber:       #e8a838;
+      --amber-light: #fdf3da;
+      --cream:       #faf8f3;
+      --text:        #2a2a2a;
+      --text-mid:    #4a4a4a;
+      --text-soft:   #787878;
+      --white:       #ffffff;
+      --shadow-sm:   0 2px 12px rgba(45,90,39,.10);
+      --shadow-md:   0 6px 28px rgba(45,90,39,.14);
+      --radius:      16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,243,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(125,186,110,.25);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .65rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--green-deep); text-decoration: none;
+    }
+    .nav-logo .leaf { font-size: 1.5rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-weight: 600; font-size: .95rem;
+      color: var(--text-mid); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--green-mid); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .75rem 1.6rem; border-radius: 100px;
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .95rem;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--green-mid); color: var(--white);
+      box-shadow: 0 4px 18px rgba(74,140,63,.35);
+    }
+    .btn-primary:hover { background: var(--green-deep); box-shadow: 0 6px 22px rgba(45,90,39,.4); }
+    .btn-secondary {
+      background: var(--white); color: var(--green-deep);
+      border: 2px solid var(--green-light);
+    }
+    .btn-secondary:hover { background: var(--green-pale); }
+
+    /* ─── PAGE HEADER ────────────────────────────────────── */
+    .page-header {
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(125,186,110,.18) 0%, transparent 70%),
+        linear-gradient(160deg, #f0f7ec 0%, #faf8f3 55%, #f7f0e0 100%);
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+    }
+    .page-header .back-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: var(--green-mid); text-decoration: none;
+      font-weight: 700; font-size: .88rem;
+      margin-bottom: 1.5rem;
+      transition: color .2s;
+    }
+    .page-header .back-link:hover { color: var(--green-deep); }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700; color: var(--green-deep);
+      line-height: 1.2; margin-bottom: .75rem;
+    }
+    .page-header p {
+      font-size: 1.05rem; color: var(--text-mid);
+      max-width: 480px; margin: 0 auto;
+    }
+
+    /* ─── MAIN CONTENT ───────────────────────────────────── */
+    main {
+      max-width: 1060px; margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ─── CATEGORY ───────────────────────────────────────── */
+    .category { margin-bottom: 3.5rem; }
+    .category-header {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: .75rem;
+      border-bottom: 2px solid rgba(125,186,110,.25);
+    }
+    .category-icon { font-size: 1.6rem; }
+    .category-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--green-deep);
+    }
+    .category-header .count {
+      margin-left: auto;
+      font-size: .78rem; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    /* ─── DOCUMENT LIST ──────────────────────────────────── */
+    .docs-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .doc-card {
+      background: var(--white);
+      border: 1.5px solid rgba(125,186,110,.22);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      display: flex; align-items: flex-start; gap: .9rem;
+      text-decoration: none; color: inherit;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .doc-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--green-light);
+    }
+    .doc-icon {
+      width: 40px; height: 40px; border-radius: 9px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .doc-icon.green  { background: var(--green-pale); }
+    .doc-icon.amber  { background: var(--amber-light); }
+    .doc-icon.blue   { background: #e3eef8; }
+    .doc-icon.purple { background: #f0ebf8; }
+    .doc-info { min-width: 0; }
+    .doc-info strong {
+      display: block; font-size: .92rem; font-weight: 700;
+      color: var(--green-deep); margin-bottom: .15rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .doc-info span   { font-size: .78rem; color: var(--text-soft); display: block; }
+    .doc-dl { margin-top: .4rem; font-size: .75rem; font-weight: 700; color: var(--green-mid); display: flex; align-items: center; gap: .25rem; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--green-deep); color: rgba(255,255,255,.8);
+      padding: 3rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1060px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--white); display: flex; align-items: center; gap: .5rem;
+    }
+    .footer-links { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,.7); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: .8rem; opacity: .5; width: 100%; text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); }
+
+    @media (max-width: 760px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+    @media (max-width: 520px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="leaf">🌿</span>
+      Douglas Platt HOA
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#news">News</a></li>
+      <li><a href="index.html#documents">Documents</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html#contact" class="btn btn-primary" style="padding:.55rem 1.2rem; font-size:.88rem;">Get in Touch</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <h1>Community Documents</h1>
+    <p>Governing documents, recorded plats, easements, and association records — all in one place.</p>
+  </div>
+
+  <main>
+
+    <!-- Association Documents -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">🏛</span>
+        <h2>Association Documents</h2>
+        <span class="count">7 documents</span>
+      </div>
+      <div class="docs-list">
+
+        <a href="HOA/Association%20Documents/Executed%20Bylaws%209-24-2025.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">📗</div>
+          <div class="doc-info">
+            <strong>Bylaws</strong>
+            <span>Adopted Sep 24, 2025</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Association%20Documents/Articles%20of%20Incorporation%202023-11-16_Executed.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">📘</div>
+          <div class="doc-info">
+            <strong>Articles of Incorporation</strong>
+            <span>Executed Nov 16, 2023</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Association%20Documents/Certificate.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">📜</div>
+          <div class="doc-info">
+            <strong>Certificate</strong>
+            <span>Association certificate</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Association%20Documents/EIN.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">🔢</div>
+          <div class="doc-info">
+            <strong>EIN</strong>
+            <span>Employer Identification Number</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Association%20Documents/Reinstatement.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📄</div>
+          <div class="doc-info">
+            <strong>Reinstatement</strong>
+            <span>Association reinstatement document</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Association%20Documents/Consent%20to%20action%202025-09-24.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">✍️</div>
+          <div class="doc-info">
+            <strong>Consent to Action</strong>
+            <span>Sep 24, 2025</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Association%20Documents/Appointment%20of%20Director%202025-09-24.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">👤</div>
+          <div class="doc-info">
+            <strong>Appointment of Director</strong>
+            <span>Sep 24, 2025</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Management -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">📋</span>
+        <h2>Management</h2>
+        <span class="count">1 document</span>
+      </div>
+      <div class="docs-list">
+
+        <a href="HOA/Douglas%20Plat%20Management%20Agreement.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">📋</div>
+          <div class="doc-info">
+            <strong>Management Agreement</strong>
+            <span>Douglas Plat HOA</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- South Douglas Recorded Documents -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">📍</span>
+        <h2>South Douglas Recorded Documents</h2>
+        <span class="count">21 documents</span>
+      </div>
+      <div class="docs-list">
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Declaration%20of%20CCRs%2C%20Div.%201%20Doc%202009-102034.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📒</div>
+          <div class="doc-info">
+            <strong>CC&Rs — Division 1</strong>
+            <span>Doc 2009-102034</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Declaration%20of%20CCRs%2C%20Div.%202%20-%20Doc%202012-200447.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📒</div>
+          <div class="doc-info">
+            <strong>CC&Rs — Division 2</strong>
+            <span>Doc 2012-200447</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Declaration%20of%20CCRs%2C%20Div.%203%20-%20Doc%202150201461.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📒</div>
+          <div class="doc-info">
+            <strong>CC&Rs — Division 3</strong>
+            <span>Doc 2150201461</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/South%20Douglas%20Div.%204%20Amended%20-%20Doc%202018-1001126.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📒</div>
+          <div class="doc-info">
+            <strong>CC&Rs — Division 4 (Amended)</strong>
+            <span>Doc 2018-1001126</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/South%20Douglas%20Div.%201%20-%20Doc%202009-102033.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🗺</div>
+          <div class="doc-info">
+            <strong>Long Plat — Division 1</strong>
+            <span>Doc 2009-102033</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/South%20Douglas%20Long%20Plat%20Div.%202%20-%20Doc%202012-200446.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🗺</div>
+          <div class="doc-info">
+            <strong>Long Plat — Division 2</strong>
+            <span>Doc 2012-200446</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Amended%20South%20Douglas%20Long%20Plat%20Div.%202%20-%20Doc%202012-1003585.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🗺</div>
+          <div class="doc-info">
+            <strong>Long Plat — Division 2 (Amended)</strong>
+            <span>Doc 2012-1003585</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/South%20Douglas%20Long%20Plat%20Div.%203%20-%20Doc%202015-201460.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🗺</div>
+          <div class="doc-info">
+            <strong>Long Plat — Division 3</strong>
+            <span>Doc 2015-201460</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/South%20Douglas%20Long%20Plat%20Div.%204%20-%20Doc%202018-800276.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🗺</div>
+          <div class="doc-info">
+            <strong>Long Plat — Division 4</strong>
+            <span>Doc 2018-800276</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Maintenance%20Covenant%20and%20Access%20Easement%20-%20Doc%202011-1200745.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">🤝</div>
+          <div class="doc-info">
+            <strong>Maintenance Covenant &amp; Access Easement</strong>
+            <span>Doc 2011-1200745</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Maintenance%20Covenant%20and%20Access%20Easement%20-%20Doc%202015-201462.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">🤝</div>
+          <div class="doc-info">
+            <strong>Maintenance Covenant &amp; Access Easement</strong>
+            <span>Doc 2015-201462</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Reciprocal%20Stormwater%20Facilities%20Easement%20-%20Doc%202009-102035.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">💧</div>
+          <div class="doc-info">
+            <strong>Reciprocal Stormwater Facilities Easement</strong>
+            <span>Doc 2009-102035</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Easement%20-%20Doc%202007-1002258.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">📐</div>
+          <div class="doc-info">
+            <strong>Easement</strong>
+            <span>Doc 2007-1002258</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/Douglas%20Road%20LLA%20-%20Doc%202007-801956.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🛣</div>
+          <div class="doc-info">
+            <strong>Douglas Road LLA</strong>
+            <span>Doc 2007-801956</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/An%20Ordinance%20of%20the%20City%20of%20Ferndale%20-%20Doc%201997-1200602.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon purple">🏙</div>
+          <div class="doc-info">
+            <strong>City of Ferndale Ordinance</strong>
+            <span>Doc 1997-1200602</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/An%20Ordinance%20of%20the%20City%20of%20Ferndale%2C%20amending%20-%20Doc%201998-202668.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon purple">🏙</div>
+          <div class="doc-info">
+            <strong>City of Ferndale Ordinance (Amending)</strong>
+            <span>Doc 1998-202668</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/QCD%202025-0902100.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📝</div>
+          <div class="doc-info">
+            <strong>Quit Claim Deed</strong>
+            <span>2025-0902100</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/QCD%202025-0902101.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📝</div>
+          <div class="doc-info">
+            <strong>Quit Claim Deed</strong>
+            <span>2025-0902101</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/REETA%20to%20QCD%202025-0902100.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📝</div>
+          <div class="doc-info">
+            <strong>REETA to QCD</strong>
+            <span>2025-0902100</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/REETA%20to%20QCD%202025-0902101.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📝</div>
+          <div class="doc-info">
+            <strong>REETA to QCD</strong>
+            <span>2025-0902101</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/South%20Douglas%20Recorded%20Documents/DOE%20letter%20060221.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">✉️</div>
+          <div class="doc-info">
+            <strong>DOE Letter</strong>
+            <span>Jun 2, 2021</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Douglas Place Recorded Documents -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">📍</span>
+        <h2>Douglas Place Recorded Documents</h2>
+        <span class="count">7 documents</span>
+      </div>
+      <div class="docs-list">
+
+        <a href="HOA/Douglas%20Place%20Recorded%20Documents/Douglas%20Place%20Div%201%202110101245.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🗺</div>
+          <div class="doc-info">
+            <strong>Long Plat — Division 1</strong>
+            <span>Doc 2110101245</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Douglas%20Place%20Recorded%20Documents/Douglas%20Place%20CCR%20Div%201%20211010246.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📒</div>
+          <div class="doc-info">
+            <strong>CC&Rs — Division 1</strong>
+            <span>Doc 211010246</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Douglas%20Place%20Recorded%20Documents/Douglas%20Place%20Long%20Plat%20Div%20II%20213102302.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🗺</div>
+          <div class="doc-info">
+            <strong>Long Plat — Division II</strong>
+            <span>Doc 213102302</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Douglas%20Place%20Recorded%20Documents/Douglas%20Place%20Long%20Plat%20Div%202%20CCR%202131002303.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📒</div>
+          <div class="doc-info">
+            <strong>CC&Rs — Division 2</strong>
+            <span>Doc 2131002303</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Douglas%20Place%20Recorded%20Documents/Douglas%20Place%20Long%20Plat%20Div%20III%202017-1202133.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon green">🗺</div>
+          <div class="doc-info">
+            <strong>Long Plat — Division III</strong>
+            <span>Doc 2017-1202133</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Douglas%20Place%20Recorded%20Documents/Douglas%20Place%20CCR%20Div%203%202017-1202134.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon amber">📒</div>
+          <div class="doc-info">
+            <strong>CC&Rs — Division 3</strong>
+            <span>Doc 2017-1202134</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Douglas%20Place%20Recorded%20Documents/Douglas%20Place%20Maint%20cov%20and%20access%202131002304.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">🤝</div>
+          <div class="doc-info">
+            <strong>Maintenance Covenant &amp; Access</strong>
+            <span>Doc 2131002304</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Stormwater Detention -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">💧</span>
+        <h2>Stormwater Detention</h2>
+        <span class="count">2 documents</span>
+      </div>
+      <div class="docs-list">
+
+        <a href="HOA/Stormwater%20Detention/Douglas%20Place%20Bioretention%20Design%20and%20Maintenance%20Criteria.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">🌱</div>
+          <div class="doc-info">
+            <strong>Bioretention Design &amp; Maintenance Criteria</strong>
+            <span>Douglas Place</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+        <a href="HOA/Stormwater%20Detention/Department%20of%20Ecology%202021-06-02.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon blue">🏛</div>
+          <div class="doc-info">
+            <strong>Department of Ecology</strong>
+            <span>Jun 2, 2021</span>
+            <div class="doc-dl">⬇ Download PDF</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🌿 Ferndale HOA</div>
+      <div class="footer-links">
+        <a href="index.html#news">News</a>
+        <a href="documents.html">Documents</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Ferndale Homeowners Association · All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
