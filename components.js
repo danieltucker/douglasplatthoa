@@ -17,6 +17,7 @@
       </a>
       <ul class="nav-links">
         <li><a href="${to('#news')}">News</a></li>
+        <li><a href="budget-meeting-2026.html">2026 Meeting</a></li>
         <li><a href="${to('#documents')}">Documents</a></li>
         <li><a href="${to('#contact')}">Contact</a></li>
       </ul>

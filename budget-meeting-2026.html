@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 Annual Budget Meeting — Douglas Plats HOA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:  #2d5a27;
+      --green-mid:   #4a8c3f;
+      --green-light: #7dba6e;
+      --green-pale:  #e8f5e3;
+      --amber:       #e8a838;
+      --amber-light: #fdf3da;
+      --cream:       #faf8f3;
+      --text:        #2a2a2a;
+      --text-mid:    #4a4a4a;
+      --text-soft:   #787878;
+      --white:       #ffffff;
+      --shadow-sm:   0 2px 12px rgba(45,90,39,.10);
+      --shadow-md:   0 6px 28px rgba(45,90,39,.14);
+      --radius:      16px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); line-height: 1.65; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,243,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(125,186,110,.25);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .65rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--green-deep); text-decoration: none;
+    }
+    .nav-logo .leaf { font-size: 1.5rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-weight: 600; font-size: .95rem; color: var(--text-mid); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--green-mid); }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.6rem; border-radius: 50px;
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .95rem;
+      text-decoration: none; cursor: pointer; border: none; transition: all .2s;
+    }
+    .btn-primary { background: var(--green-deep); color: var(--white); }
+    .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary { background: transparent; color: var(--green-deep); border: 2px solid var(--green-deep); }
+    .btn-secondary:hover { background: var(--green-pale); transform: translateY(-1px); }
+
+    /* ─── PAGE HERO ──────────────────────────────────────── */
+    .page-hero {
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(125,186,110,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 70%, rgba(232,168,56,.12) 0%, transparent 65%),
+        linear-gradient(160deg, #f0f7ec 0%, #faf8f3 55%, #f7f0e0 100%);
+      padding: 4.5rem 1.5rem 3.5rem;
+      text-align: center;
+    }
+    .page-hero .hero-badge {
+      display: inline-block;
+      background: var(--green-pale); border: 1.5px solid var(--green-light);
+      color: var(--green-deep); font-weight: 700; font-size: .8rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .45rem 1.1rem; border-radius: 50px; margin-bottom: 1.2rem;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem); color: var(--green-deep);
+      line-height: 1.2; margin-bottom: .9rem;
+    }
+    .page-hero p { font-size: 1.05rem; color: var(--text-mid); max-width: 560px; margin: 0 auto 2rem; }
+    .meeting-details {
+      display: inline-flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;
+      background: var(--white); border: 1px solid rgba(125,186,110,.3);
+      border-radius: var(--radius); padding: 1rem 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .meeting-detail { display: flex; align-items: center; gap: .5rem; font-size: .92rem; font-weight: 600; color: var(--text-mid); }
+    .meeting-detail span { font-size: 1.1rem; }
+
+    /* ─── SECTIONS ───────────────────────────────────────── */
+    section { padding: 4rem 1.5rem; }
+    section:nth-child(even) { background: var(--white); }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: .8rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--green-mid); margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem); color: var(--green-deep);
+      margin-bottom: .75rem; line-height: 1.25;
+    }
+    .section-sub { color: var(--text-mid); font-size: .97rem; margin-bottom: 2rem; max-width: 620px; }
+
+    /* ─── BUDGET TABLE ───────────────────────────────────── */
+    .budget-group { margin-bottom: 2rem; }
+    .budget-group-title {
+      font-weight: 700; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--green-mid); padding: .5rem 0; margin-bottom: .5rem;
+      border-bottom: 2px solid var(--green-pale);
+    }
+    .budget-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: .6rem .75rem; border-radius: 8px; font-size: .95rem;
+    }
+    .budget-row:nth-child(odd) { background: var(--green-pale); }
+    .budget-row .label { color: var(--text-mid); }
+    .budget-row .amount { font-weight: 700; color: var(--green-deep); }
+    .budget-subtotal {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: .6rem .75rem; font-weight: 700; font-size: .95rem;
+      border-top: 2px solid rgba(125,186,110,.3); margin-top: .25rem;
+      color: var(--text);
+    }
+    .budget-total {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--green-deep); color: var(--white);
+      padding: 1rem 1.25rem; border-radius: var(--radius);
+      font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700;
+      margin-top: 2rem;
+    }
+
+    /* ─── DUES CARDS ─────────────────────────────────────── */
+    .dues-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .dues-card {
+      background: var(--white); border: 1.5px solid rgba(125,186,110,.3);
+      border-radius: var(--radius); padding: 1.2rem 1rem; text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .dues-card .quarter { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text-soft); margin-bottom: .3rem; }
+    .dues-card .due-date { font-size: .9rem; font-weight: 600; color: var(--text-mid); margin-bottom: .5rem; }
+    .dues-card .amount { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--green-deep); font-weight: 700; }
+
+    /* ─── INFO CALLOUT ───────────────────────────────────── */
+    .callout {
+      background: var(--amber-light); border: 1.5px solid rgba(232,168,56,.4);
+      border-radius: var(--radius); padding: 1.1rem 1.3rem;
+      font-size: .9rem; color: var(--text-mid); margin-top: 1.2rem;
+    }
+    .callout strong { color: var(--text); }
+
+    /* ─── SERVICES LIST ──────────────────────────────────── */
+    .services-group { margin-bottom: 2rem; }
+    .services-group h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--green-deep); margin-bottom: .8rem;
+    }
+    .services-list { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
+    .services-list li {
+      padding: .5rem .75rem .5rem 1.8rem; position: relative;
+      font-size: .93rem; color: var(--text-mid);
+      border-radius: 8px; background: var(--green-pale);
+    }
+    .services-list li::before {
+      content: '✓'; position: absolute; left: .6rem;
+      color: var(--green-mid); font-weight: 700; font-size: .85rem;
+    }
+
+    /* ─── RESPONSIBILITIES ───────────────────────────────── */
+    .resp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .resp-card {
+      background: var(--white); border: 1.5px solid rgba(125,186,110,.25);
+      border-radius: var(--radius); padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .resp-card h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--green-deep); margin-bottom: .9rem; }
+
+    /* ─── HANDOUTS ───────────────────────────────────────── */
+    .handout-row {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      background: var(--white); border: 1.5px solid rgba(125,186,110,.25);
+      border-radius: var(--radius); padding: 1.1rem 1.3rem;
+      margin-bottom: .75rem; box-shadow: var(--shadow-sm);
+    }
+    .handout-info { display: flex; align-items: center; gap: .9rem; }
+    .handout-icon { font-size: 1.6rem; }
+    .handout-name { font-weight: 700; font-size: .97rem; color: var(--text); }
+    .handout-desc { font-size: .82rem; color: var(--text-soft); }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer { background: var(--green-deep); color: rgba(255,255,255,.8); padding: 3rem 1.5rem; }
+    .footer-inner {
+      max-width: 1060px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--white); display: flex; align-items: center; gap: .5rem; }
+    .footer-links { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,.7); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: .8rem; opacity: .5; width: 100%; text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 760px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+    @media (max-width: 520px) {
+      .nav-links { display: none; }
+      .budget-row .label { max-width: 65%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="site-nav"></nav>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <span class="hero-badge">🏛 Annual Meeting</span>
+    <h1>2026 Budget Meeting</h1>
+    <p>Review the 2026 operating budget, Windermere management services, and the role of your HOA board.</p>
+    <div class="meeting-details">
+      <div class="meeting-detail"><span>📅</span> March 25, 2026</div>
+      <div class="meeting-detail"><span>🕠</span> 5:30 PM</div>
+      <div class="meeting-detail"><span>📍</span> Ferndale Public Library</div>
+    </div>
+  </header>
+
+  <!-- BUDGET -->
+  <section id="budget">
+    <div class="section-inner">
+      <p class="section-label reveal">Handout 1 of 3</p>
+      <h2 class="section-title reveal">2026 Operating Budget</h2>
+      <p class="section-sub reveal">Full expense breakdown for the Douglas Plats HOA's first fiscal year, covering 95 lots.</p>
+
+      <div class="reveal">
+        <div class="budget-group">
+          <div class="budget-group-title">Yearly Expenses — Recurring Annual Costs</div>
+          <div class="budget-row"><span class="label">Stormwater Pond Maintenance</span><span class="amount">$4,000</span></div>
+          <div class="budget-row"><span class="label">Insurance — General / D&O</span><span class="amount">$2,000</span></div>
+          <div class="budget-row"><span class="label">Property Management (95 lots × $13/mo)</span><span class="amount">$14,820</span></div>
+          <div class="budget-row"><span class="label">Administrative / Mailings / Misc.</span><span class="amount">$500</span></div>
+          <div class="budget-subtotal"><span>Subtotal</span><span>$21,320</span></div>
+        </div>
+
+        <div class="budget-group">
+          <div class="budget-group-title">Until Filled — Funded Up to Annual Ceiling</div>
+          <div class="budget-row"><span class="label">Legal / Accounting</span><span class="amount">$6,000</span></div>
+          <div class="budget-row"><span class="label">Reserve for Future Repairs</span><span class="amount">$1,445</span></div>
+          <div class="budget-subtotal"><span>Subtotal</span><span>$7,445</span></div>
+        </div>
+
+        <div class="budget-group">
+          <div class="budget-group-title">One-Time Expenses — Charged Once at Startup</div>
+          <div class="budget-row"><span class="label">Management Company Onboarding / Setup Fee</span><span class="amount">$1,235</span></div>
+          <div class="budget-subtotal"><span>Subtotal</span><span>$1,235</span></div>
+        </div>
+
+        <div class="budget-total"><span>Total 2026 Budget</span><span>$30,000</span></div>
+      </div>
+
+      <div style="margin-top:2.5rem;">
+        <p class="section-label reveal">Quarterly Dues — 2026</p>
+        <div class="dues-grid reveal">
+          <div class="dues-card">
+            <div class="quarter">Q1</div>
+            <div class="due-date">Due April 1, 2026</div>
+            <div class="amount">$78.93</div>
+          </div>
+          <div class="dues-card">
+            <div class="quarter">Q2</div>
+            <div class="due-date">Due July 1, 2026</div>
+            <div class="amount">$78.93</div>
+          </div>
+          <div class="dues-card">
+            <div class="quarter">Q3</div>
+            <div class="due-date">Due October 1, 2026</div>
+            <div class="amount">$78.93</div>
+          </div>
+          <div class="dues-card">
+            <div class="quarter">Q4</div>
+            <div class="due-date">Due January 1, 2027</div>
+            <div class="amount">$78.93</div>
+          </div>
+        </div>
+
+        <div class="callout reveal">
+          <strong>Payment transaction fees:</strong> eCheck — $2.49 &nbsp;|&nbsp; Debit card — $9.99 &nbsp;|&nbsp; Credit card — 2.99%<br>
+          <strong>Tip:</strong> Pay your full annual amount in one payment to minimize transaction fees.<br><br>
+          <strong>2027 Projection:</strong> Base yearly expenses drop to ~$21,320 (setup fee removed). Quarterly dues estimated at <strong>~$56.11/owner</strong> if contingencies are unused, up to $75.70 if fully used.<br><br>
+          <strong>Note:</strong> Per Washington HOA law, this budget is considered ratified unless 50%+1 of voting members vote to reject it, regardless of whether a quorum is present.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WINDERMERE SERVICES -->
+  <section id="windermere">
+    <div class="section-inner">
+      <p class="section-label reveal">Handout 2 of 3</p>
+      <h2 class="section-title reveal">Property Management Services</h2>
+      <p class="section-sub reveal">Windermere Community Association Management by Ebright Wight serves as our professional managing agent at <strong>$13/lot/month</strong> ($1,235/month for 95 lots), handling day-to-day operations on behalf of the board.</p>
+
+      <div class="services-group reveal">
+        <h4>Financial Management</h4>
+        <ul class="services-list">
+          <li>Collects quarterly assessments and maintains dedicated HOA bank accounts</li>
+          <li>Monthly income statements, balance sheets, and delinquency status reports</li>
+          <li>Draft annual operating budget submitted for board review</li>
+          <li>CPA coordination for tax returns and association audits</li>
+          <li>Financial records retained for up to 7 years</li>
+        </ul>
+      </div>
+
+      <div class="services-group reveal">
+        <h4>General Administration</h4>
+        <ul class="services-list">
+          <li>Attendance at up to 4 board meetings per year</li>
+          <li>Attendance at 1 all-owner general membership meeting per year</li>
+          <li>Manager report prepared for each board meeting</li>
+          <li>Annual meeting packets prepared and distributed to all homeowners</li>
+          <li>WA Secretary of State non-profit filing and registered agent service</li>
+          <li>Rules and resolution drafting as directed by the board</li>
+        </ul>
+      </div>
+
+      <div class="services-group reveal">
+        <h4>Owner Services &amp; Communication</h4>
+        <ul class="services-list">
+          <li>24/7 online owner portal for account information and association documents</li>
+          <li>Staff available during business hours for owner and board member calls</li>
+          <li>Ownership transfers and resale certificate processing</li>
+          <li>Board governance guidance and industry information</li>
+          <li>24/7 on-call emergency line for urgent property issues</li>
+        </ul>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Contract Term:</strong> February 15, 2026 – January 31, 2027 (auto-renews annually)<br>
+        <strong>Contact:</strong> Brandye Hubbs, CMCA, AMS &nbsp;·&nbsp; <a href="mailto:brandye@windermeremgt.com" style="color:var(--green-mid);">brandye@windermeremgt.com</a><br>
+        541 W. Bakerview Rd., Bellingham, WA 98226
+      </div>
+    </div>
+  </section>
+
+  <!-- BOARD RESPONSIBILITIES -->
+  <section id="board">
+    <div class="section-inner">
+      <p class="section-label reveal">Handout 3 of 3</p>
+      <h2 class="section-title reveal">Your HOA Board — Roles &amp; Responsibilities</h2>
+      <p class="section-sub reveal">While Windermere handles day-to-day operations, the HOA Board of Directors retains ultimate authority — setting direction, approving spending, and ensuring the association operates in the best interests of all 95 homeowners.</p>
+
+      <div class="resp-grid reveal">
+        <div class="resp-card">
+          <h4>⚖️ Governance &amp; Decision-Making</h4>
+          <ul class="services-list">
+            <li>Adopt and amend CC&Rs, bylaws, and community rules</li>
+            <li>Set policies for conduct, common areas, and homeowner expectations</li>
+            <li>Ratify all vendor and service contracts</li>
+            <li>Ratify or reject the annual operating budget</li>
+            <li>Hold at least 4 board meetings + 1 general membership meeting per year</li>
+          </ul>
+        </div>
+        <div class="resp-card">
+          <h4>💰 Financial Oversight</h4>
+          <ul class="services-list">
+            <li>Review and approve the annual budget; set quarterly assessments</li>
+            <li>Authorize withdrawals from the reserve fund for major repairs</li>
+            <li>Approve any special assessments if the budget is insufficient</li>
+            <li>Ensure adequate General Liability and D&O insurance is maintained</li>
+          </ul>
+        </div>
+        <div class="resp-card">
+          <h4>🚀 First-Year Priorities</h4>
+          <ul class="services-list">
+            <li>Establish association bank accounts</li>
+            <li>Distribute CC&Rs, bylaws, and rules to all 95 homeowners</li>
+            <li>Seat a full board with elected officers</li>
+            <li>Notify all homeowners of the 2026 dues schedule and payment options</li>
+            <li>Set up email list, owner portal access, and mailing procedures</li>
+            <li>Confirm all required insurance policies are active</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout reveal" style="margin-top:1.5rem;">
+        <strong>Windermere handles:</strong> Day-to-day operations, collections, record-keeping, and reporting.<br>
+        <strong>The HOA Board decides:</strong> Policies, budget approval, major spending, and community direction.
+      </div>
+    </div>
+  </section>
+
+  <!-- HANDOUT DOWNLOADS -->
+  <section id="handouts">
+    <div class="section-inner">
+      <p class="section-label reveal">Meeting Materials</p>
+      <h2 class="section-title reveal">Download Handouts</h2>
+      <p class="section-sub reveal">The original meeting handouts are available below. A password is required — contact <a href="mailto:board@ferndalehoa.com" style="color:var(--green-mid);">board@ferndalehoa.com</a> to request access.</p>
+
+      <div class="reveal">
+        <div class="handout-row">
+          <div class="handout-info">
+            <span class="handout-icon">📄</span>
+            <div>
+              <div class="handout-name">Handout 1 — 2026 Operating Budget</div>
+              <div class="handout-desc">Expense breakdown, quarterly dues schedule, and 2027 projections</div>
+            </div>
+          </div>
+          <a href="HOA/Handout_1_Budget_2026.pdf" class="btn btn-secondary doc-card" style="padding:.5rem 1.1rem; font-size:.85rem;">⬇ Download</a>
+        </div>
+
+        <div class="handout-row">
+          <div class="handout-info">
+            <span class="handout-icon">📄</span>
+            <div>
+              <div class="handout-name">Handout 2 — Windermere Management Services</div>
+              <div class="handout-desc">Full-service contract details, what's included, and contact info</div>
+            </div>
+          </div>
+          <a href="HOA/Handout_2_Windermere_Services.pdf" class="btn btn-secondary doc-card" style="padding:.5rem 1.1rem; font-size:.85rem;">⬇ Download</a>
+        </div>
+
+        <div class="handout-row">
+          <div class="handout-info">
+            <span class="handout-icon">📄</span>
+            <div>
+              <div class="handout-name">Handout 3 — HOA Board Roles &amp; Responsibilities</div>
+              <div class="handout-desc">Board authority, financial oversight, and first-year priorities</div>
+            </div>
+          </div>
+          <a href="HOA/Handout_3_HOA_Responsibilities.pdf" class="btn btn-secondary doc-card" style="padding:.5rem 1.1rem; font-size:.85rem;">⬇ Download</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="site-footer"></footer>
+
+  <script src="components.js?v=2"></script>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 60);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>
