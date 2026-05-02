@@ -4,3 +4,6 @@
 # Rando files from different OS's
 .DS_Store
 .zshrc
+
+# Claude
+.claude

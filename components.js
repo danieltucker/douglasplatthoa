@@ -19,6 +19,7 @@
         <li><a href="${to('#news')}">News</a></li>
         <li><a href="budget-meeting-2026.html">2026 Meeting</a></li>
         <li><a href="documents.html">Documents</a></li>
+        <li><a href="getting-started.html">Getting Started</a></li>
         <li><a href="${to('#contact')}">Contact</a></li>
       </ul>
       <a href="${to('#contact')}" class="btn btn-primary" style="padding:.55rem 1.2rem; font-size:.88rem;">Get in Touch</a>
@@ -34,6 +35,7 @@
         <div class="footer-links">
           <a href="${to('#news')}">News</a>
           <a href="documents.html">Documents</a>
+          <a href="getting-started.html">Getting Started</a>
           <a href="${to('#contact')}">Contact</a>
         </div>
       </div>
