@@ -1,3 +1,6 @@
 # Password file — never commit this to the repo
 .htpasswd
 
+# Rando files from different OS's
+.DS_Store
+.zshrc
