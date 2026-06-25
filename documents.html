@@ -211,6 +211,42 @@
     .footer-links a:hover { color: var(--white); }
     .footer-copy { font-size: .8rem; opacity: .5; width: 100%; text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); }
 
+    /* ─── DOCUMENT PASSWORD GATE ─────────────────────────── */
+    #doc-gate {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(125,186,110,.25) 0%, transparent 70%),
+        linear-gradient(160deg, #f0f7ec 0%, #faf8f3 55%, #f7f0e0 100%);
+    }
+    .gate-card {
+      background: var(--white);
+      border: 1.5px solid rgba(125,186,110,.25);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      padding: 2.5rem 2rem; max-width: 400px; width: 100%;
+      text-align: center;
+    }
+    .gate-leaf { font-size: 2.5rem; }
+    .gate-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--green-deep);
+      margin: .5rem 0 .35rem;
+    }
+    .gate-card > p { color: var(--text-mid); font-size: .95rem; margin-bottom: 1.25rem; }
+    #gate-form { display: flex; flex-direction: column; gap: .8rem; }
+    #gate-input {
+      font-family: 'Nunito', sans-serif; font-size: 1rem;
+      padding: .85rem 1rem; border-radius: 12px;
+      border: 1.5px solid rgba(125,186,110,.4);
+      width: 100%; text-align: center;
+    }
+    #gate-input:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(125,186,110,.2); }
+    #gate-form .btn { justify-content: center; width: 100%; }
+    .gate-error { display: none; color: #c0392b; font-size: .85rem; margin: 0; font-weight: 600; }
+    .gate-help { font-size: .82rem; color: var(--text-soft); margin-top: 1.25rem; margin-bottom: 0; }
+
     @media (max-width: 760px) {
       nav { padding: 0 1rem; }
       .nav-links { gap: 1.2rem; }
@@ -221,6 +257,21 @@
   </style>
 </head>
 <body>
+
+  <!-- DOCUMENT PASSWORD GATE -->
+  <div id="doc-gate">
+    <div class="gate-card">
+      <div class="gate-leaf">🌿</div>
+      <h2>Community Documents</h2>
+      <p>Enter the community password to view the documents.</p>
+      <form id="gate-form" autocomplete="off">
+        <input type="password" id="gate-input" placeholder="Community password" aria-label="Community password" autofocus />
+        <button type="submit" class="btn btn-primary">View Documents</button>
+        <p class="gate-error" id="gate-error">That password didn't match — please try again.</p>
+      </form>
+      <p class="gate-help">Don't have the password? Email <strong>board@ferndalehoa.com</strong> and we'll send it to you.</p>
+    </div>
+  </div>
 
   <!-- NAV -->
   <nav id="site-nav"></nav>
@@ -741,6 +792,47 @@
 
   <!-- FOOTER -->
   <footer id="site-footer"></footer>
+
+  <!-- PASSWORD GATE LOGIC -->
+  <script>
+    (function () {
+      // ┌─────────────────────────────────────────────────────────────┐
+      // │  COMMUNITY PASSWORD — change this to whatever you share with  │
+      // │  residents. It is not case-sensitive. That's the only edit    │
+      // │  needed to update the password.                               │
+      // └─────────────────────────────────────────────────────────────┘
+      var DOCS_PASSWORD = 'douglasplats';
+
+      var gate  = document.getElementById('doc-gate');
+      var form  = document.getElementById('gate-form');
+      var input = document.getElementById('gate-input');
+      var error = document.getElementById('gate-error');
+
+      function unlock() {
+        gate.remove();
+        document.body.style.overflow = '';
+      }
+
+      // Already unlocked on this device? Skip the gate entirely.
+      if (localStorage.getItem('hoaDocsUnlocked') === 'yes') {
+        unlock();
+      } else {
+        document.body.style.overflow = 'hidden';
+        input.focus();
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (input.value.trim().toLowerCase() === DOCS_PASSWORD.toLowerCase()) {
+            localStorage.setItem('hoaDocsUnlocked', 'yes');
+            unlock();
+          } else {
+            error.style.display = 'block';
+            input.value = '';
+            input.focus();
+          }
+        });
+      }
+    })();
+  </script>
 
   <script src="components.js?v=3"></script>
 </body>
